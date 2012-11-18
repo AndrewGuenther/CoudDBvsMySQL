@@ -22,6 +22,10 @@ f = open('surnames.txt', 'r')
 surnames = [e.strip() for e in f.readlines()]
 f.close()
 
+f = open('states.txt', 'r')
+states = [e.strip() for e in f.readlines()]
+f.close()
+
 # Generate a random given name
 def randomGivenName(sex):
    return random.choice(girlNames) if sex == FEMALE else random.choice(boyNames)
@@ -29,6 +33,32 @@ def randomGivenName(sex):
 # Generate a random surname
 def randomSurname():
    return random.choice(surnames)
+
+def randomAddress(isPrimary=False):
+   return {
+             "line1":     str(random.randint(1000, 9999)) + " " + random.choice(surnames) + " Ave.",
+             "line2":     None,
+             "city":      random.choice(surnames) + "ville",
+             "state":     random.choice(states),
+             "country":   "United States",
+             "zip":       random.randint(10000, 99999),
+             "isPrimary": isPrimary
+          }
+
+def randomEducation():
+   state = random.choice(states)
+
+   return {
+             "institution": state + " State Universite",
+             "address":     {
+                               "line1": "1 University Way",
+                               "line2": None,
+                               "city":  "University Town",
+                               "state": state,
+                               "zip":   93410
+                            },
+             "level":       "college"
+          }
 
 # Create a random person
 def buildPerson(maleParent = None, femaleParent = None):
@@ -41,7 +71,9 @@ def buildPerson(maleParent = None, femaleParent = None):
                'id':           ID,
                'maleParent':   None if maleParent is None else maleParent['id'],
                'femaleParent': None if femaleParent is None else femaleParent['id'],
-               'age':          random.randint(1, 85)
+               'age':          random.randint(1, 85),
+               'address':      [randomAddress(True), randomAddress()],
+               'education':    [randomEducation()]
             }
 
    # Pick a sex for the person
@@ -68,7 +100,7 @@ def generate(ancestors, generations):
    people = []
 
    # Create the first generation
-   for _ in range(1, ancestors):
+   for _ in range(0, ancestors):
       # Create a person
       person = buildPerson()
 
@@ -79,6 +111,8 @@ def generate(ancestors, generations):
          females.append(person)
       else:
          raise NameError('Unknown sex: '+person['sex'])
+
+   people += males + females
 
    # Create following generations
    for _ in range(0, generations):
@@ -101,8 +135,7 @@ def generate(ancestors, generations):
          else:
             raise NameError('Unknown sex: '+person['sex'])
 
-      people += newMales
-      people += newFemales
+      people += newMales + newFemales
 
       males = newMales
       females = newFemales
