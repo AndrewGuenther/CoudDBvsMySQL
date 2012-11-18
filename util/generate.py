@@ -41,6 +41,7 @@ def buildPerson(maleParent = None, femaleParent = None):
                'id':           ID,
                'maleParent':   None if maleParent is None else maleParent['id'],
                'femaleParent': None if femaleParent is None else femaleParent['id']
+               'age':          random.randint(1, 85)
             }
 
    # Pick a sex for the person
