@@ -2,7 +2,7 @@ import urllib, urllib2
 import ast, json, time
 from couchbase.client import Couchbase
 
-#000000 -> 004200
+#000000 -> 004600
 #100000 -> 101634
 
 # returns dic if successful
@@ -15,7 +15,7 @@ def getFace(id):
       return ast.literal_eval(urllib2.urlopen(req).read())
    except Exception, e:
       print e
-      if '403' in e:
+      if '403' in str(e):
         print 'sleeping..'
         sleep(10)
       return None
