@@ -6,7 +6,7 @@ class MySqlDb(DB):
       self.master = self.connect("ip-10-168-7-254.us-west-1.compute.internal")
 
       self.reads = []
-      self.reads.append(self.connect("ip-10-168-7-254.us-west-1.compute.internal"))
+      self.reads.append(self.master)
       self.reads.append(self.connect("ip-10-160-183-128.us-west-1.compute.internal"))
       self.reads.append(self.connect("ip-10-160-90-29.us-west-1.compute.internal"))
       self.reads.append(self.connect("ip-10-168-111-37.us-west-1.compute.internal"))
