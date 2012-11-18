@@ -2,6 +2,8 @@ import urllib, urllib2
 import ast, json, time
 from couchbase.client import Couchbase
 
+backoff = 10
+
 #000000 -> 004600
 #100000 -> 101634
 
@@ -9,15 +11,19 @@ from couchbase.client import Couchbase
 def getFace(id):
    url = "http://graph.facebook.com/"+str(id)+"/"
    req = urllib2.Request(url, None, {"User-Agent":"Magic Browser"})
+   global backoff
 
    try:
       # Get request from web
-      return ast.literal_eval(urllib2.urlopen(req).read())
+      face =  ast.literal_eval(urllib2.urlopen(req).read())
+      backoff = 10
+      return face
    except Exception, e:
       print e
       if '403' in str(e):
-        print 'sleeping..'
-        time.sleep(10)
+        print 'sleeping for:', backoff
+        time.sleep(backoff)
+        backoff = backoff*2
       return None
 
 def scrapeId(id,bucket):
