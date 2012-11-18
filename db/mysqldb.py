@@ -11,26 +11,31 @@ class MySqlDb(DB):
       self.reads.append(self.connect("ip-10-160-90-29.us-west-1.compute.internal"))
       self.reads.append(self.connect("ip-10-168-111-37.us-west-1.compute.internal"))
 
+      # Used for round robin reads.
+      self.currentReadDb = 0
+
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
             db="test_database",
             user="perf",
-            passwd="password");
+            passwd="password")
+
+   def getWriteDb(self):
+      return self.master
+
+   def getReadDb(self):
+      self.currentReadDb = (self.currentReadDb + 1) % len(self.reads)
+      return self.reads[self.currentReadDb]
 
    def get(self, key):
-      # Get the value.
-      values = []
+      db = self.getReadDb()
 
-      for db in self.reads:
-         cursor = db.cursor()
-         cursor.execute('SELECT * from testz');
-         values.append(cursor.fetchall())
-
-      return values
+      cursor = db.cursor()
+      cursor.execute('SELECT * from testz')
+      return cursor.fetchall()
 
    def set(self, key, value):
-      # Set the value.
-      pass
+      db = self.getWriteDb
 
    def update(self, key, value):
       # Update the value.
