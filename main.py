@@ -1,5 +1,5 @@
-from mysqldb import MySqlDb
-from couchdb import CouchDB
+from db.mysqldb import MySqlDb
+from db.couchdb import CouchDB
 
 mydb = MySqlDb()
 couchdb = CouchDB()
