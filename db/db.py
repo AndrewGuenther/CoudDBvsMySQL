@@ -3,6 +3,10 @@ class DB(object):
       # Get the key.
       pass
 
+   def insertPerson(self, person):
+      # Insert a person into the database.
+      pass
+
    def set(self, key, value):
       # Set the value.
       pass

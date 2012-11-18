@@ -1,13 +1,17 @@
+from util.personbuffer import PersonBuffer
 from db.mysqldb import MySqlDb
 from db.couchdb import CouchDB
 
 mydb = MySqlDb()
 couchdb = CouchDB()
 
-keys = ['one', 'two', 'three', 'four', 'five',
-      'six', 'seven', 'eight', 'nine', 'ten']
+person = PersonBuffer.getNewPerson()
+couchdb.insertPerson(person)
 
-for i in range(0, 10000):
-   key = keys[i % len(keys)]
-   couchdb.get(key)
-   mydb.get(key)
+print mydb.get('dfwf')
+print mydb.executeWrite('DELETE FROM testz')
+print mydb.get('dfwf')
+print mydb.executeWrite("insert into testz set id = %s, value = %s", (1337, 'dsfwef'))
+print mydb.get('dfwf')
+
+# mydb.insertPerson(person)

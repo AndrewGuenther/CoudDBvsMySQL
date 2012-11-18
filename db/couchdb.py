@@ -13,6 +13,9 @@ class CouchDB(DB):
       # Get the value.
       return self.bucket.get(key)
 
+   def insertPerson(self, person):
+      self.set(str(person['id']), person)
+
    def set(self, key, value, expiry=0, flags=0):
       # Set the value.
       return self.bucket.set(key, expiry, flags, value)

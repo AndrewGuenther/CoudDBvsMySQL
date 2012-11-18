@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from db import DB
 import MySQLdb
 
@@ -27,12 +29,26 @@ class MySqlDb(DB):
       self.currentReadDb = (self.currentReadDb + 1) % len(self.reads)
       return self.reads[self.currentReadDb]
 
+   def executeWrite(self, query, args=None):
+      db = self.getWriteDb()
+      cursor = db.cursor()
+      result = cursor.execute(query, args)
+      db.commit()
+
+      return result
+
    def get(self, key):
       db = self.getReadDb()
 
       cursor = db.cursor()
       cursor.execute('SELECT * from testz')
-      return cursor.fetchall()
+      result = cursor.fetchall()
+      cursor.close()
+
+      return result
+
+   def insertPerson(self, person):
+      pprint(person)
 
    def set(self, key, value):
       db = self.getWriteDb
