@@ -5,3 +5,4 @@ mydb = MySqlDb()
 couchdb = CouchDB()
 
 print couchdb.get('john')
+print mydb.get('dfsdf')
