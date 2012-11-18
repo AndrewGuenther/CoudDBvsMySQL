@@ -1,5 +1,5 @@
 import sys
-import json
+import os
 import random
 
 # Enum for sex
@@ -9,20 +9,23 @@ MALE = 1
 # Global ID counter
 ID = 0
 
+# Get the current path
+fpath = os.path.dirname(__file__)
+
 # Load boy, girl, and surnames into memory
-f = open('boys.txt', 'r')
+f = open(os.path.join(fpath, 'boys.txt'), 'r')
 boyNames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open('girls.txt', 'r')
+f = open(os.path.join(fpath, 'girls.txt'), 'r')
 girlNames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open('surnames.txt', 'r')
+f = open(os.path.join(fpath, 'surnames.txt'), 'r')
 surnames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open('states.txt', 'r')
+f = open(os.path.join(fpath, 'states.txt'), 'r')
 states = [e.strip() for e in f.readlines()]
 f.close()
 
