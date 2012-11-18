@@ -18,7 +18,7 @@ class MySqlDb(DB):
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
-            db="test_database",
+            db="genealogy",
             user="perf",
             passwd="password")
 
@@ -41,7 +41,7 @@ class MySqlDb(DB):
       db = self.getReadDb()
 
       cursor = db.cursor()
-      cursor.execute('SELECT * from testz')
+      # cursor.execute('SELECT * from testz')
       result = cursor.fetchall()
       cursor.close()
 
@@ -49,6 +49,20 @@ class MySqlDb(DB):
 
    def insertPerson(self, person):
       pprint(person)
+      self.executeWrite( \
+            """INSERT INTO people
+               SET surname = %s,
+                   givenName = %s,
+                   femaleParent = %s,
+                   maleParent = %s,
+                   sex = %s,
+                   age = %s""",
+            (person['surname'],
+            person['givenName'],
+            person['femaleParent'],
+            person['maleParent'],
+            person['sex'],
+            person['age']))
 
    def set(self, key, value):
       db = self.getWriteDb

@@ -6,10 +6,14 @@ DROP TABLE IF EXISTS people;
 CREATE TABLE people (
    personid int(11) NOT NULL AUTO_INCREMENT,
    surname varchar(128),
-   givenname varchar(128),
-   sex char(1),
+   givenName varchar(128),
+   femaleParent int(11),
+   maleParent int(11),
+   sex tinyint(1),
    age int(11),
-   PRIMARY KEY (personid)
+   PRIMARY KEY (personid),
+   FOREIGN KEY (femaleParent) REFERENCES people(personid) ON DELETE CASCADE,
+   FOREIGN KEY (maleParent) REFERENCES people(personid) ON DELETE CASCADE
 );
 
 CREATE TABLE addresses (
