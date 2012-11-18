@@ -14,5 +14,5 @@ couchdb = CouchDB()
 #print mydb.executeWrite("insert into testz set id = %s, value = %s", (1337, 'dsfwef'))
 #print mydb.get('dfwf')
 
-for _ in range(1, 50):
+for _ in range(1, 1000):
    mydb.insertPerson(PersonBuffer.getNewPerson())

@@ -48,7 +48,6 @@ class MySqlDb(DB):
       return result
 
    def insertPerson(self, person):
-      pprint(person)
       self.executeWrite( \
             """INSERT INTO people
                SET surname = %s,
