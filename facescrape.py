@@ -17,7 +17,7 @@ def getFace(id):
       print e
       if '403' in str(e):
         print 'sleeping..'
-        sleep(10)
+        time.sleep(10)
       return None
 
 def scrapeId(id,bucket):
