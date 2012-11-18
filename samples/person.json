@@ -1,0 +1,46 @@
+{
+   "id": 1
+
+   "surname": "Andrew",
+   "givenname": "Guenther",
+
+   "sex": 1,
+
+   "age": 21,
+
+   "address": [
+      {
+         "line1": "1217 Lomitas Ave",
+         "line2": null,
+         "city": "Livermore",
+         "state": "California",
+         "country": "United States",
+         "zip": 94550
+         "isPrimary": false
+      },
+      {
+         "line1": "Romauldo 401 D",
+         "line2": "1 Grand Ave.",
+         "city": "San Luis Obispo",
+         "state": "California",
+         "country": "United States",
+         "zip": 93410
+         "isPrimary": true
+      }
+   ]
+
+   "education": [
+      {
+         "institution": "California Polytechnic State University"
+         "address": {
+            "line1": "1 Grand Ave.",
+            "line2": null,
+            "city": "San Luis Obispo",
+            "state": "California",
+            "country": "United States",
+            "zip": 93410
+         }
+         "level": "college"
+      }
+   ]
+}
