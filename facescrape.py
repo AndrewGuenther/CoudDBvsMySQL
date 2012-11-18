@@ -20,7 +20,7 @@ def scrapeId(id,bucket):
     face = getFace(id)
     if (face):
         print 'Inserted ' + face["name"]
-        #bucket.set(id, 0, 0, json.dumps(face))
+        bucket.set(id, 0, 0, json.dumps(face))
 
 def main():
     import sys

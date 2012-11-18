@@ -13,9 +13,9 @@ class CouchDB(DB):
       # Get the value.
       return self.bucket.get(key)
 
-   def set(self, key, value):
+   def set(self, key, value, expiry=0, flags=0):
       # Set the value.
-      pass
+      return self.bucket.set(key, expiry, flags, value)
 
    def update(self, key, value):
       # Update the value.
