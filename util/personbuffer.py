@@ -8,7 +8,7 @@ class PersonBuffer(object):
    @staticmethod
    def getNewPerson():
       if len(PersonBuffer.buffer) > 0:
-         return PersonBuffer.buffer.pop()
+         return PersonBuffer.buffer.pop(0)
       else:
          PersonBuffer.buffer = generate(PersonBuffer.ANCESTORS, PersonBuffer.GENERATIONS)
          return PersonBuffer.getNewPerson()
@@ -16,3 +16,6 @@ class PersonBuffer(object):
    @staticmethod
    def getPerson():
       pass
+
+if __name__ == "__main__":
+   print PersonBuffer.getNewPerson()
