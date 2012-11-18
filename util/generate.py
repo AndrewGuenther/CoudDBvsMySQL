@@ -40,7 +40,7 @@ def buildPerson(maleParent = None, femaleParent = None):
    person = {
                'id':           ID,
                'maleParent':   None if maleParent is None else maleParent['id'],
-               'femaleParent': None if femaleParent is None else femaleParent['id']
+               'femaleParent': None if femaleParent is None else femaleParent['id'],
                'age':          random.randint(1, 85)
             }
 
@@ -65,6 +65,8 @@ def generate(ancestors, generations):
    males = []
    females = []
 
+   people = []
+
    # Create the first generation
    for _ in range(1, ancestors):
       # Create a person
@@ -84,24 +86,32 @@ def generate(ancestors, generations):
       random.shuffle(males)
       random.shuffle(females)
 
+      newMales = []
+      newFemales = []
+
       for i in range(0, min(len(males), len(females))):
          # Create a person
          person = buildPerson(males[i], females[i])
 
          # Place person in appropriate sex list. If sex is not recognized, raise exception.
          if person['sex'] == MALE:
-            males.append(person)
+            newMales.append(person)
          elif person['sex'] == FEMALE:
-            females.append(person)
+            newFemales.append(person)
          else:
             raise NameError('Unknown sex: '+person['sex'])
 
-   print males
-   print females
+      people += newMales
+      people += newFemales
+
+      males = newMales
+      females = newFemales
+
+   return people
 
 if __name__ == "__main__":
    if len(sys.argv) != 3:
       print "Usage:"
       print "   python generate.py [NUMBER OF ANCESTORS] [NUMBER OF GENERATIONS]"
    else:
-      generate(int(sys.argv[1]), int(sys.argv[2]))
+      print generate(int(sys.argv[1]), int(sys.argv[2]))
