@@ -2,7 +2,8 @@ import urllib, urllib2
 import ast, json, time
 from couchbase.client import Couchbase
 
-
+#000000 -> 004200
+#100000 -> 101634
 
 # returns dic if successful
 def getFace(id):
@@ -14,13 +15,16 @@ def getFace(id):
       return ast.literal_eval(urllib2.urlopen(req).read())
    except Exception, e:
       print e
+      if '403' in e:
+        print 'sleeping..'
+        sleep(10)
       return None
 
 def scrapeId(id,bucket):
     face = getFace(id)
     if (face):
         print 'Inserted ' + face["name"]
-        bucket.set(id, 0, 0, json.dumps(face))
+        bucket.set(str(id), 0, 0, json.dumps(face))
 
 def main():
     import sys
@@ -42,7 +46,7 @@ def main():
     for id in range(start,end):
         print id
         scrapeId(id, bucket)
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 if __name__ == "__main__":
    main()
