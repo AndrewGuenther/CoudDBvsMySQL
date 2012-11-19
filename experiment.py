@@ -1,4 +1,3 @@
-from pprint import pprint
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
