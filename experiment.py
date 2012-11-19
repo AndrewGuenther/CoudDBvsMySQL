@@ -35,7 +35,7 @@ class Experiment(object):
     def reset(self):
         # Drop all tables and start from scratch.
         if (self.dbType == DBType.MYSQL):
-            schema = open('schema.sql').read()
+            schema = open('db/schema.sql').read()
             schemaStatements = schema.split(';\n')
             for statement in schemaStatements:
                 if statement:
