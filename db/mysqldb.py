@@ -32,8 +32,23 @@ class MySqlDb(DB):
    def executeWrite(self, query, args=None):
       db = self.getWriteDb()
       cursor = db.cursor()
-      result = cursor.execute(query, args)
+      result = {}
+
+      result['affectedRows'] = cursor.execute(query, args)
+      result['lastrowid'] = cursor.lastrowid
+
       db.commit()
+
+      return result
+
+   def executeSelect(self, query, args=None):
+      db = self.getReadDb()
+      cursor = db.cursor()
+
+      cursor.execute(query, args)
+
+      result = cursor.fetchall()
+      cursor.close()
 
       return result
 
@@ -47,21 +62,88 @@ class MySqlDb(DB):
 
       return result
 
+   def getPerson(self, personid):
+      return self.executeSelect( \
+            """SELECT * FROM people
+               LEFT JOIN people_addresses pa USING (personid)
+               LEFT JOIN addresses a1 ON (pa.addressid = a1.addressid)
+               LEFT JOIN people_education pe USING (personid)
+               LEFT JOIN education e USING (educationid)
+               LEFT JOIN addresses a2 ON (e.addressid = a2.addressid)
+               WHERE personid = %s""",
+            (personid))
+
+
+   def insertAddress(self, address):
+      return self.executeWrite( \
+            """INSERT INTO addresses
+               SET line1 = %s,
+                   line2 = %s,
+                   city = %s,
+                   state = %s,
+                   country = %s,
+                   zip = %s""",
+            (address.get('line1', None),
+             address.get('line2', None),
+             address.get('city', None),
+             address.get('state', None),
+             address.get('country', None),
+             address.get('zip', None)))['lastrowid']
+
+   def insertEducation(self, education):
+      addressid = self.insertAddress(education['address'])
+
+      return self.executeWrite( \
+            """INSERT INTO education
+               SET institution = %s,
+                   level = %s,
+                   addressid = %s""",
+            (education['institution'],
+             education['level'],
+             addressid))['lastrowid']
+
    def insertPerson(self, person):
+      personid = person['id']
+
       self.executeWrite( \
             """INSERT INTO people
-               SET surname = %s,
+               SET personid = %s,
+                   surname = %s,
                    givenName = %s,
                    femaleParent = %s,
                    maleParent = %s,
                    sex = %s,
                    age = %s""",
-            (person['surname'],
-            person['givenName'],
-            person['femaleParent'],
-            person['maleParent'],
-            person['sex'],
-            person['age']))
+            (personid,
+             person['surname'],
+             person['givenName'],
+             person['femaleParent'],
+             person['maleParent'],
+             person['sex'],
+             person['age']))
+
+      for address in person['address']:
+         addressid = self.insertAddress(address)
+
+         self.executeWrite( \
+               """INSERT INTO people_addresses
+                  SET personid = %s,
+                      addressid = %s,
+                      isPrimary = %s""",
+               (personid,
+                addressid,
+                1 if address['isPrimary'] else 0))
+
+      for education in person['education']:
+         educationid = self.insertEducation(education)
+
+         self.executeWrite( \
+               """INSERT INTO people_education
+                  SET personid = %s,
+                      educationid = %s""",
+               (personid,
+                educationid))
+
 
    def set(self, key, value):
       db = self.getWriteDb

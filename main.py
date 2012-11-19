@@ -1,3 +1,4 @@
+from pprint import pprint
 from util.personbuffer import PersonBuffer
 from db.mysqldb import MySqlDb
 from db.couchdb import CouchDB
@@ -14,5 +15,7 @@ couchdb = CouchDB()
 #print mydb.executeWrite("insert into testz set id = %s, value = %s", (1337, 'dsfwef'))
 #print mydb.get('dfwf')
 
-for _ in range(1, 1000):
+for _ in range(1, 10):
    mydb.insertPerson(PersonBuffer.getNewPerson())
+
+pprint(mydb.getPerson(10))

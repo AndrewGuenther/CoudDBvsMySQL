@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS people_education;
 DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS people_addresses;
 DROP TABLE IF EXISTS addresses;
@@ -37,10 +38,18 @@ CREATE TABLE people_addresses (
 );
 
 CREATE TABLE education (
-   personid int(11) NOT NULL,
+   educationid int(11) NOT NULL AUTO_INCREMENT,
    institution varchar(256),
    addressid int(11),
-   PRIMARY KEY (personid),
-   FOREIGN KEY (personid) REFERENCES people(personid) ON DELETE CASCADE,
+   level varchar(128),
+   PRIMARY KEY (educationid),
    FOREIGN KEY (addressid) REFERENCES addresses(addressid) ON DELETE CASCADE
+);
+
+CREATE TABLE people_education (
+   personid int(11) NOT NULL,
+   educationid int(11) NOT NULL,
+   PRIMARY KEY (personid, educationid),
+   FOREIGN KEY (personid) REFERENCES people(personid) ON DELETE CASCADE,
+   FOREIGN KEY (educationid) REFERENCES education(educationid) ON DELETE CASCADE
 );
