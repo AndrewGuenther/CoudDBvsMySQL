@@ -1,5 +1,5 @@
-from pprint import pprint
 from util.personbuffer import PersonBuffer
+from util.stats import Stats
 from db.mysqldb import MySqlDb
 from db.couchdb import CouchDB
 
@@ -43,7 +43,7 @@ class Experiment(object):
     def insertPeople(self, number):
         for _ in range(number):
             person = PersonBuffer.getNewPerson()
-            self.db.insertPerson(person)
+            Stats.execute(self.db.insertPerson, [person])
             self.insertedIds.append(person['id'])
 
     def getPeople(self, number):
@@ -54,7 +54,8 @@ class Experiment(object):
         ret = []
         for i in range(number):
             personid = self.insertedIds[i]
-            ret.append(self.db.getPerson(personid)[0])
+            person = Stats.execute(self.db.getPerson, [personid])
+            ret.append(person[0])
 
         return ret
 
@@ -70,4 +71,4 @@ class Experiment(object):
                 person['age'] += 1
             else:
                 person['age'] = 1
-            ret.append(self.db.updatePerson(person))
+            Stats.execute(self.db.updatePerson, [person])
