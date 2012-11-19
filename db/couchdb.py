@@ -9,17 +9,17 @@ class CouchDB(DB):
             "")
       self.bucket = self.client['genealogy']
 
-   def get(self, key):
-      # Get the value.
-      return self.bucket.get(key)
-
    def insertPerson(self, person):
       self.set(str(person['id']), person)
 
-   def set(self, key, value, expiry=0, flags=0):
-      # Set the value.
-      return self.bucket.set(key, expiry, flags, value)
+   def getPerson(self, personid):
+      return self.get(str(personid))
 
-   def update(self, key, value):
-      # Update the value.
-      pass
+   def updatePerson(self, person):
+      self.insertPerson(person)
+
+   def get(self, key):
+      return self.bucket.get(key)
+
+   def set(self, key, value, expiry=0, flags=0):
+      return self.bucket.set(key, expiry, flags, value)

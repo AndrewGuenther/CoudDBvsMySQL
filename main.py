@@ -13,16 +13,12 @@ for statement in schemaStatements:
    if statement:
       mydb.executeWrite(statement)
 
-#person = PersonBuffer.getNewPerson()
-# couchdb.insertPerson(person)
+for _ in range(1, 10):
+   person = PersonBuffer.getNewPerson()
+   mydb.insertPerson(person)
+   couchdb.insertPerson(person)
 
-#print mydb.get('dfwf')
-#print mydb.executeWrite('DELETE FROM testz')
-#print mydb.get('dfwf')
-#print mydb.executeWrite("insert into testz set id = %s, value = %s", (1337, 'dsfwef'))
-#print mydb.get('dfwf')
-
-for _ in range(1, 1000):
-   mydb.insertPerson(PersonBuffer.getNewPerson())
 
 pprint(mydb.getPerson(10))
+print "--------"
+pprint(couchdb.getPerson(10))

@@ -1,16 +1,12 @@
 class DB(object):
-   def get(self, key):
-      # Get the key.
-      pass
-
    def insertPerson(self, person):
       # Insert a person into the database.
       pass
 
-   def set(self, key, value):
-      # Set the value.
+   def getPerson(self, personid):
+      # Retrieve the specified person.
       pass
 
-   def update(self, key, value):
-      # Update the value.
+   def updatePerson(self, person):
+      # Updates the existing row associated with the given person.
       pass

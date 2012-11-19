@@ -16,92 +16,6 @@ class MySqlDb(DB):
       # Used for round robin reads.
       self.currentReadDb = 0
 
-   def connect(self, ip):
-      return MySQLdb.connect(host=ip,
-            db="genealogy",
-            user="perf",
-            passwd="password")
-
-   def getWriteDb(self):
-      return self.master
-
-   def getReadDb(self):
-      self.currentReadDb = (self.currentReadDb + 1) % len(self.reads)
-      return self.reads[self.currentReadDb]
-
-   def executeWrite(self, query, args=None):
-      db = self.getWriteDb()
-      cursor = db.cursor()
-      result = {}
-
-      result['affectedRows'] = cursor.execute(query, args)
-      result['lastrowid'] = cursor.lastrowid
-
-      db.commit()
-
-      return result
-
-   def executeSelect(self, query, args=None):
-      db = self.getReadDb()
-      cursor = db.cursor()
-
-      cursor.execute(query, args)
-
-      result = cursor.fetchall()
-      cursor.close()
-
-      return result
-
-   def get(self, key):
-      db = self.getReadDb()
-
-      cursor = db.cursor()
-      # cursor.execute('SELECT * from testz')
-      result = cursor.fetchall()
-      cursor.close()
-
-      return result
-
-   def getPerson(self, personid):
-      return self.executeSelect( \
-            """SELECT * FROM people
-               LEFT JOIN people_addresses pa USING (personid)
-               LEFT JOIN addresses a1 ON (pa.addressid = a1.addressid)
-               LEFT JOIN people_education pe USING (personid)
-               LEFT JOIN education e USING (educationid)
-               LEFT JOIN addresses a2 ON (e.addressid = a2.addressid)
-               WHERE personid = %s""",
-            (personid))
-
-
-   def insertAddress(self, address):
-      return self.executeWrite( \
-            """INSERT INTO addresses
-               SET line1 = %s,
-                   line2 = %s,
-                   city = %s,
-                   state = %s,
-                   country = %s,
-                   zip = %s""",
-            (address.get('line1', None),
-             address.get('line2', None),
-             address.get('city', None),
-             address.get('state', None),
-             address.get('country', None),
-             address.get('zip', None)))['lastrowid']
-
-   def insertEducation(self, education):
-      addressid = self.insertAddress(education['address'])
-
-      return self.executeWrite( \
-            """INSERT INTO education
-               SET institution = %s,
-                   level = %s,
-                   addressid = %s""",
-            (education['institution'],
-             education['level'],
-             addressid))['lastrowid']
-
    def insertPerson(self, person):
       personid = person['id']
 
@@ -144,10 +58,81 @@ class MySqlDb(DB):
                (personid,
                 educationid))
 
+   def getPerson(self, personid):
+      return self.executeSelect( \
+            """SELECT * FROM people
+               LEFT JOIN people_addresses pa USING (personid)
+               LEFT JOIN addresses a1 ON (pa.addressid = a1.addressid)
+               LEFT JOIN people_education pe USING (personid)
+               LEFT JOIN education e USING (educationid)
+               LEFT JOIN addresses a2 ON (e.addressid = a2.addressid)
+               WHERE personid = %s""",
+            (personid))
 
-   def set(self, key, value):
-      db = self.getWriteDb
-
-   def update(self, key, value):
-      # Update the value.
+   def updatePerson(self, person):
+      # TODO
       pass
+
+   def connect(self, ip):
+      return MySQLdb.connect(host=ip,
+            db="genealogy",
+            user="perf",
+            passwd="password")
+
+   def getWriteDb(self):
+      return self.master
+
+   def getReadDb(self):
+      self.currentReadDb = (self.currentReadDb + 1) % len(self.reads)
+      return self.reads[self.currentReadDb]
+
+   def executeWrite(self, query, args=None):
+      db = self.getWriteDb()
+      cursor = db.cursor()
+      result = {}
+
+      result['affectedRows'] = cursor.execute(query, args)
+      result['lastrowid'] = cursor.lastrowid
+
+      db.commit()
+
+      return result
+
+   def executeSelect(self, query, args=None):
+      db = self.getReadDb()
+      cursor = db.cursor()
+
+      cursor.execute(query, args)
+
+      result = cursor.fetchall()
+      cursor.close()
+
+      return result
+
+   def insertAddress(self, address):
+      return self.executeWrite( \
+            """INSERT INTO addresses
+               SET line1 = %s,
+                   line2 = %s,
+                   city = %s,
+                   state = %s,
+                   country = %s,
+                   zip = %s""",
+            (address.get('line1', None),
+             address.get('line2', None),
+             address.get('city', None),
+             address.get('state', None),
+             address.get('country', None),
+             address.get('zip', None)))['lastrowid']
+
+   def insertEducation(self, education):
+      addressid = self.insertAddress(education['address'])
+
+      return self.executeWrite( \
+            """INSERT INTO education
+               SET institution = %s,
+                   level = %s,
+                   addressid = %s""",
+            (education['institution'],
+             education['level'],
+             addressid))['lastrowid']
