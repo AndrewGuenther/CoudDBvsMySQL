@@ -1,3 +1,4 @@
+from multiprocessing import Pool, Lock
 import sys
 import subprocess
 
@@ -9,7 +10,11 @@ except:
    print "Usage: %s <script file> <mysql|couchbase> <num children>" % sys.argv[0]
    sys.exit()
 
-for i in range(0, numChildren):
-   subprocess.call(["python", script, db, str(i * 10000)])
+def launchChild(number):
+   print "launching %s" % number
+   subprocess.call(["python", script, db, str(number * 10000)])
+
+pool = Pool(processes = numChildren)
+pool.map(launchChild, range(0, numChildren))
 
 print "Done spawning children!"
