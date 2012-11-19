@@ -71,6 +71,19 @@ class MySqlDb(DB):
                WHERE personid = %s""",
             (personid))
 
+   def getPersonAndParents(self, personid):
+      return self.executeSelect( \
+            """SELECT * FROM people p
+               LEFT JOIN people_addresses pa USING (personid)
+               LEFT JOIN addresses a1 ON (pa.addressid = a1.addressid)
+               LEFT JOIN people_education pe USING (personid)
+               LEFT JOIN education e USING (educationid)
+               LEFT JOIN addresses a2 ON (e.addressid = a2.addressid)
+               LEFT JOIN people p1 ON (p.femaleParent = p1.personid)
+               LEFT JOIN people p2 ON (p.maleParent = p2.personid)
+               WHERE p.personid = %s""",
+            (personid))
+
    def updatePerson(self, person):
       self.executeWrite( \
             """UPDATE people

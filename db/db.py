@@ -7,6 +7,10 @@ class DB(object):
       # Retrieve the specified person.
       pass
 
+   def getPersonAndParents(self, personid):
+      # Retrieve the specified person and their parents.
+      pass
+
    def updatePerson(self, person):
       # Updates the existing row associated with the given person.
       pass

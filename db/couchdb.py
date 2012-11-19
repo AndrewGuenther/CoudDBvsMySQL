@@ -14,7 +14,17 @@ class CouchDB(DB):
       self.set(str(person['id']), person)
 
    def getPerson(self, personid):
+      if personid == None:
+         return None
+
       return self.get(str(personid))
+
+   def getPersonAndParents(self, personid):
+      person = self.getPerson(personid)
+
+      return (person,
+            self.getPerson(person['femaleParent']),
+            self.getPerson(person['maleParent']))
 
    def updatePerson(self, person):
       self.insertPerson(person)
