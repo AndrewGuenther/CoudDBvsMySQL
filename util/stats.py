@@ -22,6 +22,23 @@ class Stats(object):
       # Return function result
       return res
 
+   @staticmethod
+   def output():
+      maxLen = 18
+      sumTime = 0
+      print "{0:{width}} |{1:{width}} |{2:{width}} |{3:{width}}".format("Function", "Run count", "Average time", "Total time", width=maxLen)
+      print "{0:-<{width}}".format("", width=((maxLen + 2) * 4))
+
+      for key, value in Stats.ops.items():
+         total = sum(value)
+         sumTime += total
+         count = len(value)
+         average = total / count
+         print "{0:{width}} |{1:<{width}} |{2:<{width}} |{3:<{width}}".format(key, count, average, total, width=maxLen)
+
+      print
+      print "Total execution time: {0}".format(sumTime)
+
    # Pickle and dump the ops dict
    @staticmethod
    def dump(filename):
@@ -45,6 +62,8 @@ class Stats(object):
 
 # Testing procedure
 if __name__ == "__main__":
+   import os
+
    def add(x, y):
       return x + y
 
@@ -69,3 +88,8 @@ if __name__ == "__main__":
    Stats.load('test1.tmp', 'test2.tmp')
 
    assert len(Stats.ops[add.__name__]) == 10
+
+   Stats.output()
+
+   os.remove('test1.tmp')
+   os.remove('test2.tmp')
