@@ -13,19 +13,19 @@ ID = 0
 fpath = os.path.dirname(__file__)
 
 # Load boy, girl, and surnames into memory
-f = open(os.path.join(fpath, 'boys.txt'), 'r')
+f = open(os.path.join(fpath, 'txt', 'boys.txt'), 'r')
 boyNames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open(os.path.join(fpath, 'girls.txt'), 'r')
+f = open(os.path.join(fpath, 'txt', 'girls.txt'), 'r')
 girlNames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open(os.path.join(fpath, 'surnames.txt'), 'r')
+f = open(os.path.join(fpath, 'txt', 'surnames.txt'), 'r')
 surnames = [e.strip() for e in f.readlines()]
 f.close()
 
-f = open(os.path.join(fpath, 'states.txt'), 'r')
+f = open(os.path.join(fpath, 'txt', 'states.txt'), 'r')
 states = [e.strip() for e in f.readlines()]
 f.close()
 
