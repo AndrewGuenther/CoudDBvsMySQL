@@ -3,12 +3,13 @@ import subprocess
 
 try:
    script = sys.argv[1]
-   numChildren = int(sys.argv[2])
+   db = sys.argv[2]
+   numChildren = int(sys.argv[3])
 except:
-   print "Usage: %s <num children>" % sys.argv[0]
+   print "Usage: %s <script file> <mysql|couchbase> <num children>" % sys.argv[0]
    sys.exit()
 
 for i in range(0, numChildren):
-   subprocess.call(["python", script])
+   subprocess.call(["python", script, db, str(i * 10000)])
 
-print "no more children"
+print "Done spawning children!"

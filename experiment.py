@@ -1,17 +1,19 @@
+import sys
+from pprint import pprint
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
 from db.couchdb import CouchDB
 
 class DBType(object):
-    MYSQL, COUCHBASE = range(2)
+    MYSQL, COUCHBASE = ('mysql', 'couchbase')
 
 class Experiment(object):
     """docstring for Experiment"""
-    def __init__(self, dbType=1, resetDB=False):
+    def __init__(self, dbType=None, resetDB=False):
         super(Experiment, self).__init__()
         self.insertedIds = []
-        self.dbType = dbType
+        self.dbType = dbType if dbType else sys.argv[1]
         self.connect()
 
         if resetDB:
