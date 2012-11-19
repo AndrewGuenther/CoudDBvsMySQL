@@ -1,5 +1,4 @@
 import sys
-from pprint import pprint
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
@@ -14,6 +13,7 @@ class Experiment(object):
         super(Experiment, self).__init__()
         self.insertedIds = []
         self.dbType = dbType if dbType else sys.argv[1]
+        self.db = None
         self.connect()
 
         if resetDB:
@@ -35,20 +35,23 @@ class Experiment(object):
     def reset(self):
         # Drop all tables and start from scratch.
         if (self.dbType == DBType.MYSQL):
-            schema = open('schema.sql').read()
+            schema = open('db/schema.sql').read()
             schemaStatements = schema.split(';\n')
             for statement in schemaStatements:
                 if statement:
                     self.db.executeWrite(statement)
         #TODO add reset for couch
 
-    def insertPeople(self, number):
+    def insertPeople(self, number, recordStats=True):
         for _ in range(number):
             person = PersonBuffer.getNewPerson()
-            Stats.execute(self.db.insertPerson, [person])
+            if recordStats:
+                Stats.execute(self.db.insertPerson, [person])
+            else:
+                self.db.insertPerson(person)
             self.insertedIds.append(person['id'])
 
-    def getPeople(self, number):
+    def getPeople(self, number, recordStats=True):
         if number > len(self.insertedIds):
             print 'Only ', len(self.insertedIds), ' people have been inserted.'
             number = len(self.insertedIds)
@@ -56,12 +59,15 @@ class Experiment(object):
         ret = []
         for i in range(number):
             personid = self.insertedIds[i]
-            person = Stats.execute(self.db.getPerson, [personid])
-            ret.append(person[0])
+            if recordStats:
+                person = Stats.execute(self.db.getPerson, [personid])
+            else:
+                person = self.db.getPerson(personid)
+            ret.append(person)
 
         return ret
 
-    def updatePeople(self, number):
+    def updatePeople(self, number, recordStats=True):
         if number > len(self.insertedIds):
             print 'Only ', len(self.insertedIds), ' people have been inserted.'
             number = len(self.insertedIds)
@@ -73,4 +79,7 @@ class Experiment(object):
                 person['age'] += 1
             else:
                 person['age'] = 1
-            Stats.execute(self.db.updatePerson, [person])
+            if recordStats:
+                Stats.execute(self.db.updatePerson, [person])
+            else:
+                self.db.updatePerson(person)
