@@ -1,5 +1,4 @@
 import sys
-from pprint import pprint
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
@@ -14,6 +13,7 @@ class Experiment(object):
         super(Experiment, self).__init__()
         self.insertedIds = []
         self.dbType = dbType if dbType else sys.argv[1]
+        self.db = None
         self.connect()
 
         if resetDB:
@@ -57,7 +57,7 @@ class Experiment(object):
         for i in range(number):
             personid = self.insertedIds[i]
             person = Stats.execute(self.db.getPerson, [personid])
-            ret.append(person[0])
+            ret.append(person)
 
         return ret
 
