@@ -13,30 +13,34 @@ for statement in schemaStatements:
    if statement:
       mydb.executeWrite(statement)
 
-for _ in range(1, 10):
+for _ in range(1, 100):
    person = PersonBuffer.getNewPerson()
+
+   if person['femaleParent']:
+      child = person
+
    mydb.insertPerson(person)
    couchdb.insertPerson(person)
 
-personid = person['id']
+personid = child['id']
 
-pprint(mydb.getPerson(personid))
+pprint(mydb.getPersonAndParents(personid))
 print "--------"
-pprint(couchdb.getPerson(personid))
+pprint(couchdb.getPersonAndParents(personid))
 
 
-print "---- Update ----"
+# print "---- Update ----"
 
-person = mydb.getPerson(personid)
-person[0]['age'] = 1234
-person[0]['id'] = personid
-mydb.updatePerson(person[0])
+# person = mydb.getPerson(personid)
+# person[0]['age'] = 1234
+# person[0]['id'] = personid
+# mydb.updatePerson(person[0])
 
-person = couchdb.getPerson(personid)
-print person
-person['age'] = 1234
-couchdb.updatePerson(person)
+# person = couchdb.getPerson(personid)
+# print person
+# person['age'] = 1234
+# couchdb.updatePerson(person)
 
-pprint(mydb.getPerson(personid))
-print "--------"
-pprint(couchdb.getPerson(personid))
+# pprint(mydb.getPerson(personid))
+# print "--------"
+# pprint(couchdb.getPerson(personid))
