@@ -3,8 +3,6 @@ from pprint import pprint
 from experiment import Experiment
 from util.stats import Stats
 
-if dbType else sys.argv[1]
-
 def main():
     if len(sys.argv) > 1:
         dbType = int(sys.argv[1])
