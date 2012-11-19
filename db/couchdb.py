@@ -1,3 +1,4 @@
+import json
 from db import DB
 from couchbase.client import Couchbase
 from couchbase.rest_client import RestConnection
@@ -19,7 +20,7 @@ class CouchDB(DB):
       self.insertPerson(person)
 
    def get(self, key):
-      return self.bucket.get(key)
+      return json.loads(self.bucket.get(key)[2])
 
    def set(self, key, value, expiry=0, flags=0):
       return self.bucket.set(key, expiry, flags, value)

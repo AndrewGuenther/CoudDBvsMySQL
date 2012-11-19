@@ -18,7 +18,25 @@ for _ in range(1, 10):
    mydb.insertPerson(person)
    couchdb.insertPerson(person)
 
+personid = person['id']
 
-pprint(mydb.getPerson(10))
+pprint(mydb.getPerson(personid))
 print "--------"
-pprint(couchdb.getPerson(10))
+pprint(couchdb.getPerson(personid))
+
+
+print "---- Update ----"
+
+person = mydb.getPerson(personid)
+person[0]['age'] = 1234
+person[0]['id'] = personid
+mydb.updatePerson(person[0])
+
+person = couchdb.getPerson(personid)
+print person
+person['age'] = 1234
+couchdb.updatePerson(person)
+
+pprint(mydb.getPerson(personid))
+print "--------"
+pprint(couchdb.getPerson(personid))

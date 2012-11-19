@@ -2,6 +2,8 @@ from pprint import pprint
 
 from db import DB
 import MySQLdb
+import MySQLdb.cursors
+
 
 class MySqlDb(DB):
    def __init__(self):
@@ -70,14 +72,30 @@ class MySqlDb(DB):
             (personid))
 
    def updatePerson(self, person):
-      # TODO
+      self.executeWrite( \
+            """UPDATE people
+               SET surname = %s,
+                   givenName = %s,
+                   femaleParent = %s,
+                   maleParent = %s,
+                   sex = %s,
+                   age = %s
+               WHERE personid = %s""",
+            (person['surname'],
+             person['givenName'],
+             person['femaleParent'],
+             person['maleParent'],
+             person['sex'],
+             person['age'],
+             person['id']))
       pass
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
             db="genealogy",
             user="perf",
-            passwd="password")
+            passwd="password",
+            cursorclass=MySQLdb.cursors.DictCursor)
 
    def getWriteDb(self):
       return self.master
