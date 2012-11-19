@@ -10,6 +10,9 @@ class CouchDB(DB):
             "")
       self.bucket = self.client['genealogy']
 
+   def __del__(self):
+      self.client.done()
+
    def insertPerson(self, person):
       self.set(str(person['id']), person)
 

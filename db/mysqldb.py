@@ -18,6 +18,9 @@ class MySqlDb(DB):
       # Used for round robin reads.
       self.currentReadDb = 0
 
+   def __del__(self):
+      self.master.close()
+
    def insertPerson(self, person):
       personid = person['id']
 
