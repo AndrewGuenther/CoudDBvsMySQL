@@ -42,7 +42,7 @@ class Stats(object):
    # Pickle and dump the ops dict
    @staticmethod
    def dump(filename):
-      f = open(filename, 'w')
+      f = open(filename + ".dump", 'w')
       pickle.dump(Stats.ops, f)
       f.close()
 
@@ -73,7 +73,7 @@ if __name__ == "__main__":
    Stats.execute(add, [7, 8])
    Stats.execute(add, [9, 10])
 
-   Stats.dump('test1.tmp')
+   Stats.dump('test1')
    Stats.ops = {}
 
    Stats.execute(add, [1, 2])
@@ -82,14 +82,14 @@ if __name__ == "__main__":
    Stats.execute(add, [7, 8])
    Stats.execute(add, [9, 10])
 
-   Stats.dump('test2.tmp')
+   Stats.dump('test2')
    Stats.ops = {}
 
-   Stats.load('test1.tmp', 'test2.tmp')
+   Stats.load('test1.dump', 'test2.dump')
 
    assert len(Stats.ops[add.__name__]) == 10
 
    Stats.output()
 
-   os.remove('test1.tmp')
-   os.remove('test2.tmp')
+   os.remove('test1.dump')
+   os.remove('test2.dump')
