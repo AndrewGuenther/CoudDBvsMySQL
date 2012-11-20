@@ -10,7 +10,7 @@ try:
    expOffset = int(sys.argv[5])
 
    # Set the global offset to one more than machine number times a billion.
-   globalOffset = machineNumber * 1000000000000 + 1
+   globalOffset = machineNumber * 1000000000 + 1
 except:
    print "Usage: %s <script file> <mysql|couchbase> <num children> <machine number> <experiment offset>" % sys.argv[0]
    sys.exit()
