@@ -19,7 +19,7 @@ except:
    sys.exit()
 
 def launchChild(number):
-   processOffset = number * 250000000
+   processOffset = number * 100000000
    start = globalOffset + processOffset
    end = start + expOffset
 
