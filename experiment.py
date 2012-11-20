@@ -16,6 +16,8 @@ class Experiment(object):
             self.dbType = dbType
         elif len(sys.argv) > 1:
             self.dbType = sys.argv[1]
+        else:
+            self.dbType = None
 
         self.db = None
         self.connect()
