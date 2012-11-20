@@ -6,10 +6,13 @@ try:
    script = sys.argv[1]
    db = sys.argv[2]
    numChildren = int(sys.argv[3])
-   globalOffset = int(sys.argv[4])
+   machineNumber = int(sys.argv[4])
    expOffset = int(sys.argv[5])
+
+   # Set the global offset to one more than machine number times a billion.
+   globalOffset = machineNumber * 1000000000000 + 1
 except:
-   print "Usage: %s <script file> <mysql|couchbase> <num children> <global offset> <experiment offset>" % sys.argv[0]
+   print "Usage: %s <script file> <mysql|couchbase> <num children> <machine number> <experiment offset>" % sys.argv[0]
    sys.exit()
 
 def launchChild(number):
