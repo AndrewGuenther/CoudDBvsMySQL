@@ -9,7 +9,7 @@ MALE = 1
 try:
    ID = int(sys.argv[3])
 except:
-   ID = 0
+   ID = 1
 
 # Get the current path
 fpath = os.path.dirname(__file__)
@@ -69,7 +69,6 @@ def randomEducation():
 def buildPerson(maleParent = None, femaleParent = None):
    # Increment ID counter
    global ID
-   ID += 1
 
    # Define a person with the given parents and ID
    person = {
@@ -92,6 +91,8 @@ def buildPerson(maleParent = None, femaleParent = None):
       person["givenName"] = maleParent["givenName"]
    else:
       person["givenName"] = randomSurname()
+
+   ID += 1
 
    return person     
       
