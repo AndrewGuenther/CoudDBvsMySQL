@@ -7,6 +7,7 @@ class AggregateExperiment(Experiment):
    def main(self):
       self.runAggregates()
       Stats.output()
+      Stats.dump(self.getDumpFileName())
 
 exp = AggregateExperiment()
 exp.main()

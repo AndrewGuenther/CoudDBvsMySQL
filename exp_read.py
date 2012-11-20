@@ -7,6 +7,7 @@ class ReadExperiment(Experiment):
    def main(self):
       self.getPeople(10000)
       Stats.output()
+      Stats.dump(self.getDumpFileName())
 
 exp = ReadExperiment()
 exp.main()

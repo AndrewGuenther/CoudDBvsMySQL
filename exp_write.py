@@ -7,6 +7,7 @@ class WriteExperiment(Experiment):
    def main(self):
       self.insertPeople(10000)
       Stats.output()
+      Stats.dump(self.getDumpFileName())
 
 exp = WriteExperiment()
 exp.main()

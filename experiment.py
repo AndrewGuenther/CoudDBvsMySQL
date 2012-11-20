@@ -112,3 +112,6 @@ class Experiment(object):
         Stats.execute(self.db.getAgeAggregate, [])
 
         Stats.execute(self.db.getFemaleAggregate, [])
+
+    def getDumpFileName(self):
+        return "stats.%s.%s" % (self.startValues, self.endValues)

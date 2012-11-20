@@ -10,6 +10,7 @@ class MixedExperiment(Experiment):
          self.updatePeople(5, True, True)
 
       Stats.output()
+      Stats.dump(self.getDumpFileName())
 
 exp = MixedExperiment()
 exp.main()
