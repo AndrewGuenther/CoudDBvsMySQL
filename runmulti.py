@@ -1,6 +1,9 @@
 from multiprocessing import Pool, Lock
 import sys
 import subprocess
+from util.stats import Stats
+import glob
+import os
 
 try:
    script = sys.argv[1]
@@ -26,3 +29,10 @@ def launchChild(number):
 
 pool = Pool(processes = numChildren)
 pool.map(launchChild, range(0, numChildren))
+
+fpath = os.path.dirname(__file__)
+dumps = glob.glob(os.path.join(fpath, "stats/*.dump"))
+
+Stats.load(*dumps)
+
+Stats.output()
