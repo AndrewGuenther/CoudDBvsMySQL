@@ -7,6 +7,7 @@ class ReadParentsExperiment(Experiment):
    def main(self):
       self.getPeopleAndParents(10000)
       Stats.output()
+      Stats.dump(self.getDumpFileName())
 
 exp = ReadParentsExperiment()
 exp.main()
