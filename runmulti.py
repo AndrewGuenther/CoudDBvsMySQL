@@ -5,7 +5,7 @@ from util.stats import Stats
 import glob
 import os
 
-for f in glob ('stats/*.dump'):
+for f in glob.glob('stats/*.dump'):
    os.unlink (f)
 
 try:
