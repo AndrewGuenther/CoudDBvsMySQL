@@ -106,3 +106,8 @@ class Experiment(object):
                 Stats.execute(self.db.updatePerson, [person])
             else:
                 self.db.updatePerson(person)
+
+    def runAggregates(self, recordStats=True):
+        Stats.execute(self.db.getAgeAggregate, [])
+
+        Stats.execute(self.db.getFemaleAggregate, [])

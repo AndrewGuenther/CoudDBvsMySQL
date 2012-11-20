@@ -113,19 +113,13 @@ class MySqlDb(DB):
              person['age'],
              person['id']))
 
-   def getAggregate(self, filterDict):
-      conditions = []
-      for attr in filterDict:
-         if attr in personAttrs:
-            conditions.append(attr + ' = "' + str(filterDict[attr]) + '"')
-         else:
-            print attr, "not supported in aggregate query!"
-      condition = " AND ".join(conditions)
-      query = 'SELECT count(personid) FROM people p where ' + condition
+   def getAgeAggregate(self):
+      query = 'select sum(age), count(*), min(age), max(age), pow(sum(age), 2) from people;'
       result = self.executeSelect(query)
-      if result:
-         return result[0]['count(personid)']
-      return None
+
+   def getFemaleAggregate(self):
+      query = 'select count(*) from people where sex = 0;'
+      result = self.executeSelect(query)
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
