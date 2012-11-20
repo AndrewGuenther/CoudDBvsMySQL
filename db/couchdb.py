@@ -33,8 +33,14 @@ class CouchDB(DB):
       self.insertPerson(person)
 
    def getAggregate(self, filterDict):
-      view = "_design/dev_views/_view/females"
-      return self.bucket.view(view)
+      if 'sex' in filterDict:
+         view = "_design/views/_view/females"
+      else:
+         view = "_design/views/_view/age"
+      rows = self.bucket.view(view)
+      if rows:
+         return rows[0]['value']
+      return None
 
    def get(self, key):
       return json.loads(self.bucket.get(key)[2])
