@@ -6,6 +6,7 @@ class TestExperiment(Experiment):
 
    def main(self):
       self.getPeople(10)
+      self.getPeopleAndParents(1000)
       Stats.output()
       print "done"
 

@@ -81,6 +81,18 @@ class Experiment(object):
 
         return ret
 
+    def getPeopleAndParents(self, number, recordStats=True):
+        ret = []
+        for i in range(number):
+            personid = self.getRandomPersonid()
+            if recordStats:
+                person = Stats.execute(self.db.getPersonAndParents, [personid])
+            else:
+                person = self.db.getPersonAndParents(personid)
+            ret.append(person)
+
+        return ret
+
     def updatePeople(self, number, recordStats=True):
         people = self.getPeople(number, False)
 
