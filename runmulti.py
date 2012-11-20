@@ -5,6 +5,9 @@ from util.stats import Stats
 import glob
 import os
 
+for f in glob ('stats/*.dump'):
+   os.unlink (f)
+
 try:
    script = sys.argv[1]
    db = sys.argv[2]
