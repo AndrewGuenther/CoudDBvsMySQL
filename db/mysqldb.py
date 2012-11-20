@@ -65,7 +65,8 @@ class MySqlDb(DB):
                 educationid))
 
    def getPerson(self, personid):
-      return self.executeSelect( \
+      # Just take the first entry so we have a valid person.
+      person = self.executeSelect( \
             """SELECT * FROM people
                LEFT JOIN people_addresses pa USING (personid)
                LEFT JOIN addresses a1 ON (pa.addressid = a1.addressid)
@@ -73,9 +74,15 @@ class MySqlDb(DB):
                LEFT JOIN education e USING (educationid)
                LEFT JOIN addresses a2 ON (e.addressid = a2.addressid)
                WHERE personid = %s""",
-            (personid))
+            (personid))[0]
+
+      # Unfortunately the DB column is named differently.
+      person['id'] = person['personid']
+
+      return person
 
    def getPersonAndParents(self, personid):
+      # Just take the first entry so we have a valid person.
       return self.executeSelect( \
             """SELECT * FROM people p
                LEFT JOIN people_addresses pa USING (personid)
@@ -86,7 +93,7 @@ class MySqlDb(DB):
                LEFT JOIN people p1 ON (p.femaleParent = p1.personid)
                LEFT JOIN people p2 ON (p.maleParent = p2.personid)
                WHERE p.personid = %s""",
-            (personid))
+            (personid))[0]
 
    def updatePerson(self, person):
       self.executeWrite( \
