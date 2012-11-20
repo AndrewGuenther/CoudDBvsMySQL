@@ -6,14 +6,7 @@ import random
 FEMALE = 0
 MALE = 1
 
-# Global ID counter
 ID = 0
-
-if __name__ != "__main__":
-   try:
-      ID = int(sys.argv[2])
-   except:
-      pass
 
 # Get the current path
 fpath = os.path.dirname(__file__)

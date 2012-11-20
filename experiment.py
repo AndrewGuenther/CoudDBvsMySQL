@@ -12,9 +12,28 @@ class Experiment(object):
     def __init__(self, dbType=None, resetDB=False):
         super(Experiment, self).__init__()
         self.insertedIds = []
-        self.dbType = dbType if dbType else sys.argv[1]
+        if dbType:
+            self.dbType = dbType
+        elif len(sys.argv) > 1:
+            self.dbType = sys.argv[1]
+        else:
+            self.dbType = None
+
         self.db = None
         self.connect()
+
+        if len(sys.argv) > 3:
+            # Start and end of existing inserted values.
+            self.startValues = int(sys.argv[2])
+            self.endValues = int(sys.argv[3])
+        elif len(sys.argv) > 2:
+            self.endValues = int(sys.argv[2])
+        else:
+            self.endValues = 1000
+
+        # Set the personid counter.
+        global ID
+        ID = self.endValues
 
         if resetDB:
             self.reset()
