@@ -73,7 +73,6 @@ class Experiment(object):
         ret = []
         for i in range(number):
             personid = self.getRandomPersonid()
-            print personid
             if recordStats:
                 person = Stats.execute(self.db.getPerson, [personid])
             else:
