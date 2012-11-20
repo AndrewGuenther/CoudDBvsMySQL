@@ -1,6 +1,7 @@
 import sys
 import random
 from util.personbuffer import PersonBuffer
+from util.generate import PersonGenerator
 from util.stats import Stats
 from db.mysqldb import MySqlDb
 from db.couchdb import CouchDB
@@ -30,6 +31,8 @@ class Experiment(object):
             self.endValues = int(sys.argv[2])
         else:
             self.endValues = 1000
+
+        PersonGenerator.ID = self.endValues
 
     def connect(self):
         try:
