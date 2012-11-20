@@ -6,7 +6,10 @@ import random
 FEMALE = 0
 MALE = 1
 
-ID = 0
+try:
+   ID = int(sys.argv[3])
+except:
+   ID = 0
 
 # Get the current path
 fpath = os.path.dirname(__file__)

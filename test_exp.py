@@ -3,7 +3,7 @@ from util.stats import Stats
 
 class TestExperiment(Experiment):
    def main(self):
-      self.insertPeople(9999)
+      self.insertPeople(10)
       Stats.output()
       print "done"
 

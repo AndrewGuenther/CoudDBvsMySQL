@@ -31,10 +31,6 @@ class Experiment(object):
         else:
             self.endValues = 1000
 
-        # Set the personid counter.
-        global ID
-        ID = self.endValues
-
         if resetDB:
             self.reset()
 
