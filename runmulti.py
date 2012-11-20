@@ -26,5 +26,3 @@ def launchChild(number):
 
 pool = Pool(processes = numChildren)
 pool.map(launchChild, range(0, numChildren))
-
-print "Done spawning children!"
