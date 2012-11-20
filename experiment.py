@@ -1,3 +1,4 @@
+import sys
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
@@ -8,10 +9,10 @@ class DBType(object):
 
 class Experiment(object):
     """docstring for Experiment"""
-    def __init__(self, dbType=1, resetDB=False):
+    def __init__(self, dbType=None, resetDB=False):
         super(Experiment, self).__init__()
         self.insertedIds = []
-        self.dbType = dbType
+        self.dbType = dbType if dbType else sys.argv[1]
         self.db = None
         self.connect()
 
