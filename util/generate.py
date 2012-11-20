@@ -7,10 +7,13 @@ FEMALE = 0
 MALE = 1
 
 # Global ID counter
-try:
-   ID = int(sys.argv[2])
-except:
-   ID = 0
+ID = 0
+
+if __name__ != "__main__":
+   try:
+      ID = int(sys.argv[2])
+   except:
+      pass
 
 # Get the current path
 fpath = os.path.dirname(__file__)
@@ -55,7 +58,7 @@ def randomEducation():
    state = random.choice(states)
 
    return {
-             "institution": state + " State Universite",
+             "institution": state + " State University",
              "address":     {
                                "line1": "1 University Way",
                                "line2": None,
@@ -70,7 +73,6 @@ def randomEducation():
 def buildPerson(maleParent = None, femaleParent = None):
    # Increment ID counter
    global ID
-   ID += 1
 
    # Define a person with the given parents and ID
    person = {
@@ -83,7 +85,7 @@ def buildPerson(maleParent = None, femaleParent = None):
             }
 
    # Pick a sex for the person
-   person['sex'] = random.randint(FEMALE, MALE)
+   person['sex'] = ID % 2
 
    # Pick a surname for the person
    person['surname'] = randomGivenName(person['sex'])
@@ -94,57 +96,44 @@ def buildPerson(maleParent = None, femaleParent = None):
    else:
       person["givenName"] = randomSurname()
 
+   ID += 1
    return person     
       
 # Generate a set of random people starting with a given number of ancestors and then reproduce for
 # a given number of generations
 def generate(ancestors, generations):
    # Lists to hold the current generation
-   males = []
-   females = []
-
    people = []
 
    # Create the first generation
+   newGeneration = []
+
    for _ in range(0, ancestors):
       # Create a person
       person = buildPerson()
 
       # Place person in appropriate sex list. If sex is not recognized, raise exception.
-      if person['sex'] == MALE:
-         males.append(person)
-      elif person['sex'] == FEMALE:
-         females.append(person)
-      else:
-         raise NameError('Unknown sex: '+person['sex'])
+      newGeneration.append(person)
 
-   people += males + females
+   people += newGeneration
 
    # Create following generations
    for _ in range(0, generations):
       # Shuffle the current generation
-      random.shuffle(males)
-      random.shuffle(females)
+      random.shuffle(newGeneration)
 
-      newMales = []
-      newFemales = []
+      males = [w for w in newGeneration if w["sex"] is MALE]
+      females = [w for w in newGeneration if w["sex"] is FEMALE]
+
+      newGeneration = []
 
       for i in range(0, min(len(males), len(females))):
          # Create a person
          person = buildPerson(males[i], females[i])
 
-         # Place person in appropriate sex list. If sex is not recognized, raise exception.
-         if person['sex'] == MALE:
-            newMales.append(person)
-         elif person['sex'] == FEMALE:
-            newFemales.append(person)
-         else:
-            raise NameError('Unknown sex: '+person['sex'])
+         newGeneration.append(person)
 
-      people += newMales + newFemales
-
-      males = newMales
-      females = newFemales
+      people += newGeneration
 
    return people
 
@@ -153,4 +142,6 @@ if __name__ == "__main__":
       print "Usage:"
       print "   python generate.py [NUMBER OF ANCESTORS] [NUMBER OF GENERATIONS]"
    else:
-      print generate(int(sys.argv[1]), int(sys.argv[2]))
+      for p in generate(int(sys.argv[1]), int(sys.argv[2])):
+         print p
+         print
