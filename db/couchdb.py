@@ -38,7 +38,7 @@ class CouchDB(DB):
          conditions.append("(doc." + attr + ' == "' + str(filterDict[attr]) + '")')
       condition = " && ".join(conditions)
       map_fun = "function(doc) { if (" + condition + ") emit(doc.name, null); }"
-      return self.bucket.query(map_fun, '_count')
+      return self.client.query(map_fun, '_count')
 
    def get(self, key):
       return json.loads(self.bucket.get(key)[2])

@@ -15,14 +15,19 @@ class Experiment(object):
         if dbType:
             self.dbType = dbType
         elif len(sys.argv) > 1:
-            self.dbType = int(sys.argv[1])
+            self.dbType = sys.argv[1]
 
         self.db = None
         self.connect()
 
-        # Start and end of existing inserted values.
-        self.startValues = int(sys.argv[2])
-        self.endValues = int(sys.argv[3])
+        if len(sys.argv) > 3:
+            # Start and end of existing inserted values.
+            self.startValues = int(sys.argv[2])
+            self.endValues = int(sys.argv[3])
+        elif len(sys.argv) > 2:
+            self.endValues = int(sys.argv[2])
+        else:
+            self.endValues = 1000
 
         # Set the personid counter.
         global ID
