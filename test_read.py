@@ -5,8 +5,8 @@ class TestExperiment(Experiment):
    """Simple test experiment that performs some reads."""
 
    def main(self):
-      self.getPeople(10)
-      self.getPeopleAndParents(1000)
+      self.getPeople(5000)
+      self.getPeopleAndParents(5000)
       Stats.output()
       print "done"
 
