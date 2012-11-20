@@ -69,6 +69,7 @@ def randomEducation():
 def buildPerson(maleParent = None, femaleParent = None):
    # Increment ID counter
    global ID
+   ID += 1
 
    # Define a person with the given parents and ID
    person = {
@@ -92,7 +93,6 @@ def buildPerson(maleParent = None, femaleParent = None):
    else:
       person["givenName"] = randomSurname()
 
-   ID += 1
    return person     
       
 # Generate a set of random people starting with a given number of ancestors and then reproduce for
