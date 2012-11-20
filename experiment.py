@@ -12,7 +12,11 @@ class Experiment(object):
     def __init__(self, dbType=None, resetDB=False):
         super(Experiment, self).__init__()
         self.insertedIds = []
-        self.dbType = dbType if dbType else sys.argv[1]
+        if dbType:
+            self.dbType = dbType
+        elif len(sys.argv) > 1:
+            self.dbType = int(sys.argv[1])
+
         self.db = None
         self.connect()
 

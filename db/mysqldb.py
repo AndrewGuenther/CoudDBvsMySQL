@@ -4,6 +4,7 @@ from db import DB
 import MySQLdb
 import MySQLdb.cursors
 
+personAttrs = ["personid", "surname", "givenName", "femaleParent", "maleParent", "sex", "age"]
 
 class MySqlDb(DB):
    def __init__(self):
@@ -104,7 +105,17 @@ class MySqlDb(DB):
              person['sex'],
              person['age'],
              person['id']))
-      pass
+
+   def getAggregate(self, filterDict):
+      conditions = []
+      for attr in filterDict:
+         if attr in personAttrs:
+            condition.append(attr + ' = "' + str(filterDict[attr]) + '"')
+         else:
+            print attr, "not supported in aggregate query!"
+      condition = " AND ".join(conditions)
+      query = 'SELECT count(personid) FROM people p where ' + condition
+      return self.executeSelect(query)
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,

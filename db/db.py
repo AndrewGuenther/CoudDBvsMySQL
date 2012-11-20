@@ -14,3 +14,7 @@ class DB(object):
    def updatePerson(self, person):
       # Updates the existing row associated with the given person.
       pass
+
+   def getAggregate(self, filterDict):
+      # Gets a count of the person entries with the given attributes (in filterDict)
+      pass
