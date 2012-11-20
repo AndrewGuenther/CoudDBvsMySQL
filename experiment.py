@@ -58,6 +58,7 @@ class Experiment(object):
         #TODO add reset for couch
 
     def getRandomPersonid(self):
+      # One less because we don't want it to be inclusive.
       return random.randint(self.startValues, self.endValues - 1)
 
     def insertPeople(self, number, recordStats=True):
@@ -71,7 +72,6 @@ class Experiment(object):
     def getPeople(self, number, recordStats=True):
         ret = []
         for i in range(number):
-            # One less because we don't want it to be inclusive.
             personid = self.getRandomPersonid()
             print personid
             if recordStats:
