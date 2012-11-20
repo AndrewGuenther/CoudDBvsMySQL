@@ -1,4 +1,5 @@
 import sys
+import random
 from util.personbuffer import PersonBuffer
 from util.stats import Stats
 from db.mysqldb import MySqlDb
@@ -11,7 +12,6 @@ class Experiment(object):
     """docstring for Experiment"""
     def __init__(self, dbType=None, resetDB=False):
         super(Experiment, self).__init__()
-        self.insertedIds = []
         if dbType:
             self.dbType = dbType
         elif len(sys.argv) > 1:
@@ -57,6 +57,9 @@ class Experiment(object):
                     self.db.executeWrite(statement)
         #TODO add reset for couch
 
+    def getRandomPersonid(self):
+      return random.randint(self.startValues, self.endValues - 1)
+
     def insertPeople(self, number, recordStats=True):
         for _ in range(number):
             person = PersonBuffer.getNewPerson()
@@ -64,16 +67,13 @@ class Experiment(object):
                 Stats.execute(self.db.insertPerson, [person])
             else:
                 self.db.insertPerson(person)
-            self.insertedIds.append(person['id'])
 
     def getPeople(self, number, recordStats=True):
-        if number > len(self.insertedIds):
-            print 'Only ', len(self.insertedIds), ' people have been inserted.'
-            number = len(self.insertedIds)
-
         ret = []
         for i in range(number):
-            personid = self.insertedIds[i]
+            # One less because we don't want it to be inclusive.
+            personid = self.getRandomPersonid()
+            print personid
             if recordStats:
                 person = Stats.execute(self.db.getPerson, [personid])
             else:
@@ -83,10 +83,6 @@ class Experiment(object):
         return ret
 
     def updatePeople(self, number, recordStats=True):
-        if number > len(self.insertedIds):
-            print 'Only ', len(self.insertedIds), ' people have been inserted.'
-            number = len(self.insertedIds)
-
         people = self.getPeople(number)
 
         for person in people:
@@ -94,6 +90,7 @@ class Experiment(object):
                 person['age'] += 1
             else:
                 person['age'] = 1
+
             if recordStats:
                 Stats.execute(self.db.updatePerson, [person])
             else:
