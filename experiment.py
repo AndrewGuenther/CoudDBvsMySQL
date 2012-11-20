@@ -93,8 +93,8 @@ class Experiment(object):
 
         return ret
 
-    def updatePeople(self, number, recordStats=True):
-        people = self.getPeople(number, False)
+    def updatePeople(self, number, recordStats=True, recordReadStats=False):
+        people = self.getPeople(number, recordReadStats)
 
         for person in people:
             if person['age']:
