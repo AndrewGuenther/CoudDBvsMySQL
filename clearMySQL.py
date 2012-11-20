@@ -6,9 +6,9 @@ class ResetExperiment(Experiment):
    pass
 
 if len(sys.argv) < 2:
-   print "Usage: %s mysql" % sys.argv[0]
+   print "Usage: %s <mysql|couchbase>" % sys.argv[0]
    sys.exit()
 
-if raw_input("Really really clear tables? [y/n]") == 'y':
+if raw_input("Really really drop all data? [y/n]") == 'y':
    exp = ResetExperiment()
    exp.reset()
