@@ -33,12 +33,8 @@ class CouchDB(DB):
       self.insertPerson(person)
 
    def getAggregate(self, filterDict):
-      conditions = []
-      for attr in filterDict:
-         conditions.append("(doc." + attr + ' == "' + str(filterDict[attr]) + '")')
-      condition = " && ".join(conditions)
-      map_fun = "function(doc) { if (" + condition + ") emit(doc.name, null); }"
-      return self.client.query(map_fun, '_count')
+      view = "_design/dev_views/_view/females"
+      return self.bucket.view(view)
 
    def get(self, key):
       return json.loads(self.bucket.get(key)[2])

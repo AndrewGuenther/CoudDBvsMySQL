@@ -110,12 +110,12 @@ class MySqlDb(DB):
       conditions = []
       for attr in filterDict:
          if attr in personAttrs:
-            condition.append(attr + ' = "' + str(filterDict[attr]) + '"')
+            conditions.append(attr + ' = "' + str(filterDict[attr]) + '"')
          else:
             print attr, "not supported in aggregate query!"
       condition = " AND ".join(conditions)
       query = 'SELECT count(personid) FROM people p where ' + condition
-      return self.executeSelect(query)
+      return self.executeSelect(query)['count(personid)']
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
