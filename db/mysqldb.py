@@ -115,7 +115,10 @@ class MySqlDb(DB):
             print attr, "not supported in aggregate query!"
       condition = " AND ".join(conditions)
       query = 'SELECT count(personid) FROM people p where ' + condition
-      return self.executeSelect(query)['count(personid)']
+      result = self.executeSelect(query)
+      if result:
+         return result[0]['count(personid)']
+      return None
 
    def connect(self, ip):
       return MySQLdb.connect(host=ip,
