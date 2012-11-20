@@ -16,6 +16,14 @@ class Experiment(object):
         self.db = None
         self.connect()
 
+        # Start and end of existing inserted values.
+        self.startValues = int(sys.argv[2])
+        self.endValues = int(sys.argv[3])
+
+        # Set the personid counter.
+        global ID
+        ID = self.endValues
+
         if resetDB:
             self.reset()
 

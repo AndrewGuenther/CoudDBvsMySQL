@@ -6,11 +6,7 @@ import random
 FEMALE = 0
 MALE = 1
 
-# Global ID counter
-try:
-   ID = int(sys.argv[2])
-except:
-   ID = 0
+ID = 0
 
 # Get the current path
 fpath = os.path.dirname(__file__)
