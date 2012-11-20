@@ -10,7 +10,7 @@ class DBType(object):
 
 class Experiment(object):
     """docstring for Experiment"""
-    def __init__(self, dbType=None, resetDB=False):
+    def __init__(self, dbType=None):
         super(Experiment, self).__init__()
         if dbType:
             self.dbType = dbType
@@ -30,9 +30,6 @@ class Experiment(object):
             self.endValues = int(sys.argv[2])
         else:
             self.endValues = 1000
-
-        if resetDB:
-            self.reset()
 
     def connect(self):
         try:
