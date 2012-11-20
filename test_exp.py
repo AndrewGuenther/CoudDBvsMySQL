@@ -5,7 +5,7 @@ class TestExperiment(Experiment):
    """Simple test experiment that performs some writes."""
 
    def main(self):
-      self.insertPeople(10)
+      self.insertPeople(10000)
       Stats.output()
       print "done"
 
