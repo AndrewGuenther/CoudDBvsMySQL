@@ -48,3 +48,6 @@ class CouchDB(DB):
 
    def set(self, key, value, expiry=0, flags=0):
       return self.bucket.set(key, expiry, flags, value)
+
+   def clear(self):
+      self.bucket.flush()

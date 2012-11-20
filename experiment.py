@@ -49,13 +49,14 @@ class Experiment(object):
 
     def reset(self):
         # Drop all tables and start from scratch.
-        if (self.dbType == DBType.MYSQL):
+        if self.dbType == DBType.MYSQL:
             schema = open('db/schema.sql').read()
             schemaStatements = schema.split(';\n')
             for statement in schemaStatements:
                 if statement:
                     self.db.executeWrite(statement)
-        #TODO add reset for couch
+        elif self.dbType == DBType.COUCHBASE:
+           self.db.clear()
 
     def getRandomPersonid(self):
       # One less because we don't want it to be inclusive.
