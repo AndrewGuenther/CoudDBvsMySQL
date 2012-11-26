@@ -2,6 +2,8 @@ import time
 import pickle
 
 class Stats(object):
+   """Collects statistics for later consumption."""
+
    ops = {}
 
    # Execute and time the given method

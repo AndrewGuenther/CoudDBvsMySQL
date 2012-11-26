@@ -1,4 +1,6 @@
 class DB(object):
+   """Base class for all database classes."""
+
    def insertPerson(self, person):
       # Insert a person into the database.
       pass
@@ -15,6 +17,10 @@ class DB(object):
       # Updates the existing row associated with the given person.
       pass
 
-   def getAggregate(self, filterDict):
-      # Gets a count of the person entries with the given attributes (in filterDict)
+   def getAgeAggregate(self):
+      # Performs aggregates based on people's ages.
+      pass
+
+   def getFemaleAggregate(self):
+      # Returns the number of females in the database.
       pass

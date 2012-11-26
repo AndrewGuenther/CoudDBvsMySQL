@@ -2,7 +2,7 @@ from experiment import Experiment, DBType
 from util.stats import Stats
 
 class MixedExperiment(Experiment):
-   """Simple experiment that performs some reads and writes."""
+   """Experiment that performs an even number of reads and writes."""
 
    def main(self):
       for _ in range(0, 1000):

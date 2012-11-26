@@ -3,6 +3,8 @@ import os
 import random
 
 class PersonGenerator(object):
+   """Randomly generates lots of people for inserting/updating."""
+
    # Enum for sex
    FEMALE = 0
    MALE = 1

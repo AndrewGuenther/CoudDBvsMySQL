@@ -2,6 +2,7 @@ from generate import PersonGenerator
 import random
 
 class PersonBuffer(object):
+   """A buffer for generate.py"""
    buffer = []
    ANCESTORS = 50
    GENERATIONS = 10

@@ -10,7 +10,18 @@ class DBType(object):
     MYSQL, COUCHBASE = ('mysql', 'couchbase')
 
 class Experiment(object):
-    """docstring for Experiment"""
+    """Base class for all experiments. Abstracts the databases and other
+       setup code including:
+          * Command line parsing for
+             * Current database
+             * Valid personid's
+          * Connecting to database
+          * Performing common operations
+             * Inserting a person
+             * Updating a person
+             * Retrieving a person
+             * Retrieving a person and their parents
+          """
     def __init__(self, dbType=None):
         super(Experiment, self).__init__()
         if dbType:
@@ -108,7 +119,7 @@ class Experiment(object):
             else:
                 self.db.updatePerson(person)
 
-    def runAggregates(self, recordStats=True):
+    def runAggregates(self):
         Stats.execute(self.db.getAgeAggregate, [])
 
         Stats.execute(self.db.getFemaleAggregate, [])
