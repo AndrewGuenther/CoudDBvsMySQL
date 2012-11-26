@@ -2,7 +2,7 @@ import sys
 from experiment import Experiment, DBType
 
 class ResetExperiment(Experiment):
-   """Dummy class to clear the MySQL tables"""
+   """Dummy class to clear the DB."""
    pass
 
 if len(sys.argv) < 2:
