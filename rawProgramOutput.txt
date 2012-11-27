@@ -1,0 +1,675 @@
+This is the raw output from running the experiments on two app machines.
+
+Couchbase
+
+200,000
+
+
+mzych@ip-10-168-87-145 10:11:17 csc560-DBComparison > python runmulti.py exp_write.py couchbase 10 0 0
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.00910095         |910.095
+
+Total execution time: 910.095266581
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.00934718         |934.718
+
+Total execution time: 934.71771574
+
+mzych@ip-10-168-87-145 10:13:41 csc560-DBComparison > python runmulti.py exp_agg.py couchbase 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.45861            |4.5861
+getFemaleAggregate |10                 |0.353831           |3.53831
+
+Total execution time: 8.12441015244
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.366298           |3.66298
+getFemaleAggregate |10                 |0.308535           |3.08535
+
+Total execution time: 6.74832129478
+
+
+mzych@ip-10-168-87-145 10:16:08 csc560-DBComparison > python runmulti.py exp_mixed.py couchbase 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.011551           |577.552
+getPerson          |50000              |0.0167482          |837.408
+
+Total execution time: 1414.95948577
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0116172          |580.859
+getPerson          |50000              |0.0171081          |855.407
+
+Total execution time: 1436.26643801
+
+
+mzych@ip-10-168-87-145 10:20:25 csc560-DBComparison > python runmulti.py exp_read_parents.py couchbase 10 0 10000
+
+Total execution time: 368.059952974
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0362504          |3625.04
+
+Total execution time: 3625.04491687
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0367191          |3671.91
+
+Total execution time: 3671.91244006
+
+
+mzych@ip-10-168-87-145 10:27:43 csc560-DBComparison > python runmulti.py exp_read.py couchbase 10 0 10000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0186805          |1868.05
+
+Total execution time: 1868.04538965
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0188412          |1884.12
+
+Total execution time: 1884.11717319
+
+400,000
+
+
+mzych@ip-10-168-87-145 10:31:53 csc560-DBComparison > python runmulti.py exp_write.py couchbase 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.00943744         |943.744
+
+Total execution time: 943.744324446
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.00940658         |940.658
+
+Total execution time: 940.65816617
+
+
+mzych@ip-10-168-87-145 10:34:35 csc560-DBComparison > python runmulti.py exp_agg.py couchbase 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.305861           |3.05861
+getFemaleAggregate |10                 |0.249125           |2.49125
+
+Total execution time: 5.54986023903
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.249719           |2.49719
+getFemaleAggregate |10                 |0.213449           |2.13449
+
+Total execution time: 4.63168525696
+
+
+mzych@ip-10-168-87-145 10:35:28 csc560-DBComparison > python runmulti.py exp_mixed.py couchbase 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0116966          |584.831
+getPerson          |50000              |0.0170328          |851.639
+
+Total execution time: 1436.46968317
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0116464          |582.321
+getPerson          |50000              |0.0164193          |820.966
+
+Total execution time: 1403.28649855
+
+
+mzych@ip-10-168-87-145 10:38:42 csc560-DBComparison > python runmulti.py exp_read_parents.py couchbase 10 0 20000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0363827          |3638.27
+
+Total execution time: 3638.26640368
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0363158          |3631.58
+
+Total execution time: 3631.57602096
+
+
+mzych@ip-10-168-87-145 10:46:01 csc560-DBComparison > python runmulti.py exp_read.py couchbase 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0182515          |1825.15
+
+Total execution time: 1825.14659595
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0184608          |1846.08
+
+Total execution time: 1846.07825041
+
+1,200,000
+
+
+mzych@ip-10-168-87-145 10:52:39 csc560-DBComparison > python runmulti.py exp_write.py couchbase 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |400000             |0.00970092         |3880.37
+
+Total execution time: 3880.36841702
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |400000             |0.0097396          |3895.84
+
+Total execution time: 3895.84044981
+
+
+mzych@ip-10-168-87-145 11:00:34 csc560-DBComparison > python runmulti.py exp_agg.py couchbase 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.595555           |5.95555
+getFemaleAggregate |10                 |0.515907           |5.15907
+
+
+Total execution time: 11.1146221161
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.432932           |4.32932
+getFemaleAggregate |10                 |0.362934           |3.62934
+
+Total execution time: 7.95865893364
+
+
+mzych@ip-10-168-87-145 11:02:19 csc560-DBComparison > python runmulti.py exp_mixed.py couchbase 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.011682           |584.099
+getPerson          |50000              |0.0172767          |863.837
+
+Total execution time: 1447.93593287
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0117104          |585.52
+getPerson          |50000              |0.0168878          |844.389
+
+Total execution time: 1429.90858603
+
+
+mzych@ip-10-168-87-145 11:05:08 csc560-DBComparison > python runmulti.py exp_read_parents.py couchbase 10 0 60000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0366631          |3666.31
+
+Total execution time: 3666.30865479
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0363102          |3631.02
+
+Total execution time: 3631.01906347
+
+
+
+mzych@ip-10-168-87-145 11:12:02 csc560-DBComparison > python runmulti.py exp_read.py couchbase 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0187342          |1873.42
+
+Total execution time: 1873.42129993
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0181758          |1817.58
+
+Total execution time: 1817.57778931
+
+
+2,400,000
+
+
+mzych@ip-10-168-87-145 11:16:39 csc560-DBComparison > python runmulti.py exp_write.py couchbase 10 0 60000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |600000             |0.0099328          |5959.68
+
+Total execution time: 5959.6793077
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |600000             |0.00980371         |5882.23
+
+Total execution time: 5882.2250483
+
+
+mzych@ip-10-168-87-145 11:28:13 csc560-DBComparison > python runmulti.py exp_agg.py couchbase 10 0 120000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.724389           |7.24389
+getFemaleAggregate |10                 |0.433828           |4.33828
+
+Total execution time: 11.5821690559
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |0.498611           |4.98611
+getFemaleAggregate |10                 |0.594912           |5.94912
+
+Total execution time: 10.9352271557
+
+
+mzych@ip-10-168-87-145 11:29:08 csc560-DBComparison > python runmulti.py exp_mixed.py couchbase 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0122633          |613.163
+getPerson          |50000              |0.0174691          |873.453
+
+Total execution time: 1486.61648226
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0122571          |612.853
+getPerson          |50000              |0.017146           |857.301
+
+Total execution time: 1470.15390658
+
+
+
+mzych@ip-10-168-87-145 11:32:34 csc560-DBComparison > python runmulti.py exp_read_parents.py couchbase 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.036795           |3679.5
+
+Total execution time: 3679.49603248
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0363603          |3636.03
+
+Total execution time: 3636.0326283
+
+
+
+mzych@ip-10-168-87-145 11:39:31 csc560-DBComparison > python runmulti.py exp_read.py couchbase 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0186659          |1866.59
+
+Total execution time: 1866.59078455
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.0186505          |1865.05
+
+Total execution time: 1865.04917216
+
+
+MySQL
+
+
+200,000
+
+
+[root@ip-10-168-222-135 csc560-DBComparison]# python runmulti.py exp_write.py mysql 10 1 0
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.0690434          |6904.34
+
+Total execution time: 6904.34365559
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.0690604          |6906.04
+
+Total execution time: 6906.03558707
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_agg.py mysql 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |1.35212            |13.5212
+getFemaleAggregate |10                 |0.522714           |5.22714
+
+Total execution time: 18.7483179569
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |1.45302            |14.5302
+getFemaleAggregate |10                 |0.419555           |4.19555
+
+Total execution time: 18.7257852554
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_mixed.py mysql 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.012185           |609.249
+getPerson          |50000              |0.00171516         |85.7578
+
+Total execution time: 695.006523609
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0121944          |609.72
+getPerson          |50000              |0.00172655         |86.3275
+
+Total execution time: 696.047217369
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read_parents.py mysql 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00422261         |422.261
+
+Total execution time: 422.261026621
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00427414         |427.414
+
+Total execution time: 427.414126158
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read.py mysql 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00371637         |371.637
+
+Total execution time: 371.636951923
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00376615         |376.615
+
+Total execution time: 376.614579201
+
+20
+
+400,000
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_write.py mysql 10 0 10000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.068899           |6889.9
+
+Total execution time: 6889.9012382
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |100000             |0.0689596          |6895.96
+
+Total execution time: 6895.95677018
+
+Took 1161 seconds to fully replicate
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_agg.py mysql 10 0 20000
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |3.40289            |34.0289
+getFemaleAggregate |10                 |1.03498            |10.3498
+
+Total execution time: 44.3786218166
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |3.56935            |35.6935
+getFemaleAggregate |10                 |1.18223            |11.8223
+
+Total execution time: 47.5157394409
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_mixed.py mysql 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0124642          |623.212
+getPerson          |50000              |0.00215881         |107.94
+
+Total execution time: 731.151983976
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0124403          |622.013
+getPerson          |50000              |0.00220348         |110.174
+
+Total execution time: 732.186542273
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read_parents.py mysql 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00481355         |481.355
+
+Total execution time: 481.355468988
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00483387         |483.387
+
+Total execution time: 483.386886835
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read.py mysql 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00371414         |371.414
+
+Total execution time: 371.414069414
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00373875         |373.875
+
+Total execution time: 373.875346184
+
+
+
+1,200,000
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_write.py mysql 10 0 20000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |400000             |0.0676194          |27047.8
+
+Total execution time: 27047.7529385
+
+
+Total execution time: 2706.43708491
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |400000             |0.0676258          |27050.3
+
+Total execution time: 27050.3357759
+
+Took 4768 seconds to fully replicate
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_agg.py mysql 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |11.7657            |117.657
+getFemaleAggregate |10                 |6.27478            |62.7478
+
+Total execution time: 180.40500164
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |11.6791            |116.791
+getFemaleAggregate |10                 |6.32572            |63.2572
+
+Total execution time: 180.047860861
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_mixed.py mysql 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0136047          |680.235
+getPerson          |50000              |0.0127811          |639.056
+
+Total execution time: 1319.29143858
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0135898          |679.491
+getPerson          |50000              |0.0126749          |633.744
+
+Total execution time: 1313.23500538
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read_parents.py mysql 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00518089         |518.089
+
+Total execution time: 518.088667631
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00515923         |515.923
+
+Total execution time: 515.922890902
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read.py mysql 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00416093         |416.093
+
+Total execution time: 416.093470335
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00412906         |412.906
+
+Total execution time: 412.905546188
+
+2,400,000
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_write.py mysql 10 0 60000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |600000             |0.0696236          |41774.2
+
+Total execution time: 41774.1870718
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+insertPerson       |600000             |0.0695574          |41734.4
+
+Total execution time: 41734.4224627
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_agg.py mysql 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |27.6               |276.0
+getFemaleAggregate |10                 |17.5956            |175.956
+
+Total execution time: 451.956065655
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getAgeAggregate    |10                 |27.6868            |276.868
+getFemaleAggregate |10                 |17.5641            |175.641
+
+Total execution time: 452.509125948
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_mixed.py mysql 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.0202867          |1014.34
+getPerson          |50000              |0.0282231          |1411.15
+
+Total execution time: 2425.48813605
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+updatePerson       |50000              |0.020292           |1014.6
+getPerson          |50000              |0.0284799          |1424.0
+
+Total execution time: 2438.59738207
+
+
+[root@ip-10-168-87-145 csc560-DBComparison]# python runmulti.py exp_read_parents.py mysql 10 0 120000
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.0049542          |495.42
+
+Total execution time: 495.419555664
+
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPersonAndParents |100000             |0.00492747         |492.747
+
+Total execution time: 492.747496128
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00438468         |438.468
+
+Total execution time: 438.467873573
+
+Function           |Run count          |Average time       |Total time
+--------------------------------------------------------------------------------
+getPerson          |100000             |0.00441282         |441.282
+
+Total execution time: 441.282150745
+
